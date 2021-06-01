@@ -11,9 +11,9 @@ export interface Representative {
 export interface Customer {
     id?: number;
     name?: number;
-    country?: Country;
+    country?: any;
     company?: string;
     date?: string;
     status?: string;
-    representative?: Representative;
+    representative?: any;
 }

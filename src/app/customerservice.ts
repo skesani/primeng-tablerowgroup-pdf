@@ -10,6 +10,6 @@ export class CustomerService {
         return this.http.get<any>('assets/customers-medium.json')
             .toPromise()
             .then(res => <Customer[]>res.data)
-            .then(data => { return data; });
+            .then(data => data);
     }
 }
