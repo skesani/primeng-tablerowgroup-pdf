@@ -9,7 +9,6 @@ import * as cloneDeep from 'lodash/cloneDeep';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
     customers: Customer[];
@@ -20,13 +19,12 @@ export class AppComponent implements OnInit {
 
     cols: any[];
 
-    constructor(private customerService: CustomerService, private cdr: ChangeDetectorRef) { }
+    constructor(private customerService: CustomerService) { }
 
     ngOnInit() {
         this.customerService.getCustomersMedium().then(data => {
             this.customers = data;
             this.updateRowGroupMetaData();
-            this.cdr.detectChanges();
         });
         this.cols = [
             { field: 'name', header: 'Name' },
@@ -47,7 +45,7 @@ export class AppComponent implements OnInit {
     }
 
     exportPdf() {
-        const doc = new jsPDF();
+        let doc = new jsPDF();
         doc.setFontSize(18);
         doc.text('With content', 14, 22);
         doc.setFontSize(11);
@@ -57,7 +55,7 @@ export class AppComponent implements OnInit {
             x.country = x.country.name;
             x.representative = x.representative.name;
         });
-        doc['autoTable'](this.exportColumns, customers);
+        doc.autoTable(this.exportColumns, customers);
         doc.save('table' + new Date().getTime() + '.pdf');
     }
 
