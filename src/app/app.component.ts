@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Customer} from './customer';
 import {CustomerService} from './customerservice';
 import jsPDF from 'jspdf';
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
     }
 
     exportPdf() {
-        let doc = new jsPDF();
+        const doc = new jsPDF();
         doc.setFontSize(18);
         doc.text('With content', 14, 22);
         doc.setFontSize(11);
@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
             x.country = x.country.name;
             x.representative = x.representative.name;
         });
-        doc.autoTable(this.exportColumns, customers);
+        doc['autoTable'](this.exportColumns, customers);
         doc.save('table' + new Date().getTime() + '.pdf');
     }
 
