@@ -31,7 +31,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "run-p start:server start:client",
+    "start": "ng serve",
     "format:fix": "pretty-quick --staged",
     "precommit": "run-s format:fix lint",
     "build": "ng build",
